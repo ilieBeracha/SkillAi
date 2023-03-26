@@ -10,6 +10,7 @@ function Home(): JSX.Element {
                 <Route path="/" element={<Dashboard />}></Route>
                 <Route path="/interview" element={<Interview />}></Route>
             </Routes>
+            
         </div>
     );
 }

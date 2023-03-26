@@ -2,7 +2,8 @@ import "./Header.css";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutRedux } from "../../app/authSlice";
-import logo from '../../assets/images/logoWhite.png';
+// import logo from '../../assets/images/logoWhite.png';
+import logo from '../../assets/images/logo.png';
 import BasicMenu from "../BasicMenu/BasicMenu";
 
 function Header(): JSX.Element {
