@@ -1,6 +1,6 @@
 .Interview {
     width: 100%;
-	height: 100%;
+    height: 100%;
     /* background-color: blue; */
 }
 
@@ -36,18 +36,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 800;
+    font-size: 18px;
 }
 
-.questionsBtns {
+.questionBtns {
     width: 100%;
     height: 20%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
 }
 
 .questionBtns button {
     background-color: var(--color1);
+    width: 100%;
+    height: 50px;
     color: white;
 }
 
@@ -55,6 +60,7 @@
     opacity: 0.5;
     pointer-events: none;
     cursor: not-allowed;
+    margin: 0 auto;
 }
 
 .StartInterviewDiv {
@@ -86,4 +92,26 @@
 
 .HomePlayground {
     width: 50%;
+}
+
+.StartInterviewButton {
+    background-color: var(--color1);
+    color: white;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.HomeTestResults {
+    width: 40%;
+    height: 40%;
+    background-color: white;
+    box-shadow: 10px 10px 10px rgb(171, 167, 167);
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
 }

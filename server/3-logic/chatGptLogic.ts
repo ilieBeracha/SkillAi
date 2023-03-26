@@ -5,7 +5,6 @@ export async function chatGpt(data: InterviewData) {
     const messages: any = [];
     messages.push({ role: 'system', content: 'Act like an robot who creates questions, write just json' })
     messages.push({ role: 'user', content: 'Give me 10 ' + data.difficulty + ' ' + data.type + ' in ' + data.language + 'in this format [{question: question, answer: answer}], Please refrain from providing any additional comments.' })
-    console.log(messages);
 
     try {
         const completion: any = openai.createChatCompletion({
@@ -15,7 +14,6 @@ export async function chatGpt(data: InterviewData) {
         let { data } = await completion
 
         const reply = data.choices[0].message.content;
-        console.log(reply);
         return reply;
     } catch (e) {
         console.log(e);
@@ -23,7 +21,6 @@ export async function chatGpt(data: InterviewData) {
 }
 
 export async function chatGptRate(data: any) {
-    console.log(data);
     const stringifyData = JSON.stringify(data)
     
     const messages: any = [];
