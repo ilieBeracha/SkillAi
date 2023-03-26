@@ -22,13 +22,14 @@
     width: 50%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     /* z-index: -1; */
 }
 
 .LandingPageHome img {
-    width: 100%;
+    width: 90%;
 }
 
 .LandingPageHomePreview button {
@@ -45,6 +46,10 @@
     align-items: center;
     gap: 10px;
     width: 90%;
+}
+
+.LandingPageHomeSentance h3{
+    font-size: 18px;
 }
 
 .LandingPageHomePreview a {

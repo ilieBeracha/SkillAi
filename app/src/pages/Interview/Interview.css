@@ -58,7 +58,7 @@
 
 .btnDisbale {
     opacity: 0.5;
-    pointer-events: none;
+    /* pointer-events: none; */
     cursor: not-allowed;
     margin: 0 auto;
 }
@@ -114,4 +114,11 @@
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
+}
+
+.PageNumber{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }

@@ -20,6 +20,7 @@ function Home(): JSX.Element {
     const [clearEditorValue, setClearEditorValue] = useState('')
     const [startInterviewState, setStartInterviewState] = useState(false);
     const [examId, setExamId] = useState(0);
+    const [isLoadingFinish, setIsLoadingFinish] = useState(false);
 
     async function startInterview() {
         setStartInterviewState(true)
@@ -52,8 +53,11 @@ function Home(): JSX.Element {
         }
     }
 
+
+
     async function nextQuestion() {
         if (currentQuestion === 9) {
+            setIsLoadingFinish(true)
             const res: any = await gptService.getTestResults(codeValue).then(res => JSON.parse(res));
             setResults(res)
             console.log(res);
@@ -70,6 +74,7 @@ function Home(): JSX.Element {
             }
             console.log(results);
 
+            setIsLoadingFinish(false);
             return;
         } else {
             if (answerEmpty) {
@@ -117,13 +122,13 @@ function Home(): JSX.Element {
                         isLoading ? (
                             <TypeAnimation
                                 sequence={[
-                                    'Building your inteview',
+                                    'Building your Inteview',
                                     1000,
                                     'Building your Assessment',
                                     1000,
                                     'Building your Test',
                                     1000,
-                                    'Building your exam',
+                                    'Building your Exam',
                                     1000,
 
                                 ]}
@@ -132,23 +137,45 @@ function Home(): JSX.Element {
                                 repeat={Infinity}
                                 style={{ fontSize: '2em', display: 'inline-block' }}
                             />
-
-                        ) : interviewData ? (
-                            <div className="InterviewContainer">
-                                <div className="HomeInterview">
-                                    <div className="questions">
-                                        <span>{interviewData[currentQuestion]?.question}</span>
-                                    </div>
-                                    <div className="questionBtns">
-                                        <button className={answerEmpty ? 'btnDisbale' : 'nextButton'} disabled={answerEmpty} onClick={nextQuestion}>Next</button>
-                                    </div>
-                                </div>
-                                <div className="HomePlayground">
-                                    <Playground onCodeChange={handleCodeChange} clearEditorValue={clearEditorValue} />
-                                </div>
-                            </div>
                         ) :
-                            <></>}
+                            isLoadingFinish ? (
+                                <TypeAnimation
+                                    sequence={[
+                                        'Reviewing your Inteview',
+                                        1000,
+                                        'Reviewing your Assessment',
+                                        1000,
+                                        'Reviewing your Test',
+                                        1000,
+                                        'Reviewing your Exam',
+                                        1000,
+
+                                    ]}
+                                    wrapper="span"
+                                    cursor={true}
+                                    repeat={Infinity}
+                                    style={{ fontSize: '2em', display: 'inline-block' }}
+                                />
+
+                            ) : interviewData ? (
+                                <div className="InterviewContainer">
+                                    <div className="HomeInterview">
+                                        <div className="questions">
+                                            <span>{interviewData[currentQuestion]?.question}</span>
+                                        </div>
+                                        <div className="questionBtns">
+                                            <button className={answerEmpty ? 'btnDisbale' : 'nextButton'} disabled={answerEmpty} onClick={nextQuestion}>Next</button>
+                                        <div className="PageNumber">
+                                            <p>{currentQuestion +1}/10</p>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div className="HomePlayground">
+                                        <Playground onCodeChange={handleCodeChange} clearEditorValue={clearEditorValue} />
+                                    </div>
+                                </div>
+                            ) :
+                                <></>}
         </div>
     );
 }

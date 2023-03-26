@@ -1,6 +1,9 @@
 import "./LandingPageHome.css";
 import CodeIcon from '@mui/icons-material/Code';
-import image from '../../assets/images/interview4.png'
+import image from '../../assets/images/interview4.png';
+import view from '../../assets/images/view.png';
+import clouds from '../../assets/images/clouds.png';
+
 function LandingPageHome(): JSX.Element {
 
 
@@ -18,7 +21,9 @@ function LandingPageHome(): JSX.Element {
                 </div>
             </div>
             <div className="LandingPageHomeImage">
-                <img src={image} alt="" />
+                {/* <img id="cloudImg" src={clouds} alt="" /> */}
+                <img id="handsImg"  src={image} alt="" />
+                <img id="mountainImg"  src={view} alt="" />
             </div>
         </div>
     );

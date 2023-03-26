@@ -17,7 +17,7 @@ function Header(): JSX.Element {
     }
 
     return (
-        <div className="Header">
+        <div className={authSlice? 'Header HeaderShadow' : 'Header'}>
             <div className="HeaderContainer">
 
                 <div className="HeaderHeading">
