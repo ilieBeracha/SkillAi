@@ -126,7 +126,7 @@ function Home(): JSX.Element {
                                 results[0].questions.map((q: any, i: number) => {
                                     return (
                                         <div className="questionsFeedback">
-                                            <span>{q.id+1}</span>
+                                            <span>{q.id + 1}</span>
                                             <span>{q.question}</span>
                                             <span>{q.answer}</span>
                                             <span>{q.correct ? '+' : '-'}</span>
@@ -139,7 +139,12 @@ function Home(): JSX.Element {
                     </div>
                     :
                     startInterviewState === false ?
-                        <button className="StartInterviewButton" onClick={startInterview}>Start Exam</button>
+                        <div className="StartInterviewDiv">
+                            <h2>Exam parameters: </h2> 
+                            <span>language: {authSlice.language}</span>
+                            <span>Difficulty: {authSlice.difficulty}</span>
+                            <button className="StartInterviewButton" onClick={startInterview}>Start</button>
+                        </div>
                         :
                         isLoading ? (
                             <TypeAnimation
