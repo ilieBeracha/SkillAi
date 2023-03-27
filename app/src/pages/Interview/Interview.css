@@ -95,15 +95,47 @@
 }
 
 .StartInterviewButton {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 10px;
     background-color: var(--color1);
-    color: white;
-    box-sizing: border-box;
-    padding: 20px;
-}
+    color: #fff;
+    box-shadow: 0px 0px 10px #ccc;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .StartInterviewButton::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0%;
+    height: 0%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.5s ease-in-out;
+    z-index: -1;
+  }
+  
+  .StartInterviewButton:hover {
+    background-color: #fff;
+    color: var(--color1);
+    box-shadow: 0px 0px 10px var(--color1);
+  }
+  
+  .StartInterviewButton:hover::before {
+    width: 200%;
+    height: 200%;
+  }
+  
 
 .HomeTestResults {
-    width: 40%;
-    height: 40%;
+    width: 60%;
+    height: max-content;
     background-color: white;
     box-shadow: 10px 10px 10px rgb(171, 167, 167);
     color: black;
@@ -114,6 +146,13 @@
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
+}
+
+.questionsFeedback{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 .PageNumber{

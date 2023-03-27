@@ -8,6 +8,8 @@ import { TypeAnimation } from 'react-type-animation';
 import { examService } from "../../Services/examService";
 import { examModel } from "../../models/ExamModal";
 import { ExamContentModal } from "../../models/ExamContentModal";
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import DoneIcon from '@mui/icons-material/Done';
 
 function Home(): JSX.Element {
     const [interviewData, setInterviewData] = useState<any>([]);
@@ -107,6 +109,10 @@ function Home(): JSX.Element {
         setAnswerEmpty(value.trim() === '');
     }
 
+    window.onbeforeunload = function () {
+        return "Data will be lost if you leave the page, are you sure?";
+    };
+
     return (
         <div className="Home">
             {
@@ -114,6 +120,22 @@ function Home(): JSX.Element {
                     <div className="HomeTestResults">
                         <h3>Rate: </h3> <hr /> <p> {results[0].rate}</p>
                         <h3>Feedback: </h3> <hr />  <p>{results[0].feedback}</p>
+                        <h3>Questions: </h3> <hr />
+                        <div className="">
+                            {
+                                results[0].questions.map((q: any, i: number) => {
+                                    return (
+                                        <div className="questionsFeedback">
+                                            <span>{q.id+1}</span>
+                                            <span>{q.question}</span>
+                                            <span>{q.answer}</span>
+                                            <span>{q.correct ? '+' : '-'}</span>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+
                     </div>
                     :
                     startInterviewState === false ?
@@ -165,9 +187,10 @@ function Home(): JSX.Element {
                                         </div>
                                         <div className="questionBtns">
                                             <button className={answerEmpty ? 'btnDisbale' : 'nextButton'} disabled={answerEmpty} onClick={nextQuestion}>Next</button>
-                                        <div className="PageNumber">
-                                            <p>{currentQuestion +1}/10</p>
-                                        </div>
+                                            {/* <button onClick={prevQuestion}>Previous</button> */}
+                                            <div className="PageNumber">
+                                                <p>{currentQuestion + 1}/10</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="HomePlayground">
