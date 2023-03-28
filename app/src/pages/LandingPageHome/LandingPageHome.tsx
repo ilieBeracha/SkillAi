@@ -3,6 +3,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import image from '../../assets/images/interview4.png';
 import view from '../../assets/images/view.png';
 import clouds from '../../assets/images/clouds.png';
+import ConfInterview from "../../Components/ConfInterview/ConfInterview";
 
 function LandingPageHome(): JSX.Element {
 
@@ -18,12 +19,16 @@ function LandingPageHome(): JSX.Element {
                     <CodeIcon fontSize="large" />
                     <h3>Choose from multiple languages and get custom-built interview questions in seconds.</h3>
                     <CodeIcon fontSize="large" />
+
+                </div>
+                <div className="ConfInterviewDiv">
+
+                    <ConfInterview />
                 </div>
             </div>
             <div className="LandingPageHomeImage">
-                {/* <img id="cloudImg" src={clouds} alt="" /> */}
-                <img id="handsImg"  src={image} alt="" />
-                <img id="mountainImg"  src={view} alt="" />
+                <img id="cloudImg" src={clouds} alt="" />
+                <img id="mountainImg" src={view} alt="" />
             </div>
         </div>
     );

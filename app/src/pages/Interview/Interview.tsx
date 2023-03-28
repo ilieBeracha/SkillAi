@@ -1,34 +1,29 @@
 import { useEffect, useState } from "react";
 import Playground from "../../Components/Playground/Playground";
-import { InterviewData } from "../../models/InterviewData";
 import { gptService } from "../../Services/gptService";
 import { useSelector } from 'react-redux'
-import "./Interview.css";
 import { TypeAnimation } from 'react-type-animation';
-import { examService } from "../../Services/examService";
-import { examModel } from "../../models/ExamModal";
-import { ExamContentModal } from "../../models/ExamContentModal";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import DoneIcon from '@mui/icons-material/Done';
+import "./Interview.css";
 
-function Home(): JSX.Element {
+function Interview(): JSX.Element {
     const [interviewData, setInterviewData] = useState<any>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const authSlice = useSelector((state: any) => state.auth)
+    const interviewSlice = useSelector((state: any) => state.interview)
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [codeValue, setCodeValue] = useState<any[]>([]);
     const [results, setResults] = useState<any>([]);
     const [answerEmpty, setAnswerEmpty] = useState(true);
     const [clearEditorValue, setClearEditorValue] = useState('')
     const [startInterviewState, setStartInterviewState] = useState(false);
-    const [examId, setExamId] = useState(0);
     const [isLoadingFinish, setIsLoadingFinish] = useState(false);
 
     async function startInterview() {
         setStartInterviewState(true)
         setIsLoading(true);
         try {
-            const res = await gptService.sendInterviewData(authSlice.language, authSlice.difficulty, authSlice.type);
+            const res = await gptService.sendInterviewData(interviewSlice.language, interviewSlice.difficulty);
             setInterviewData((JSON.parse(res)));
             console.log(JSON.parse(res));
 
@@ -38,23 +33,11 @@ function Home(): JSX.Element {
         } finally {
             setIsLoading(false);
         }
-        const examData: examModel | any = {
-            language: authSlice.language,
-            difficulty: authSlice.difficulty,
-            type: authSlice.type,
-            userId: authSlice.sub,
-            rate: 0
-        }
-
-
-        try {
-            const res = await examService.addExam(examData);
-            setExamId(res.insertId)
-        } catch (e) {
-            console.log(e);
-        }
     }
 
+    useEffect(()=>{
+        startInterview()
+    },[])
 
 
     async function nextQuestion() {
@@ -62,37 +45,11 @@ function Home(): JSX.Element {
             setIsLoadingFinish(true)
             const res: any = await gptService.getTestResults(codeValue).then(res => JSON.parse(res));
             setResults(res)
-            console.log(res);
-
-            const updateExamData: any = {
-                rate: res[0].rate,
-                id: examId
-            }
-
-            try {
-                await examService.updateExamRate(updateExamData);
-            } catch (e) {
-                console.log(e);
-            }
-            console.log(results);
-
             setIsLoadingFinish(false);
             return;
         } else {
             if (answerEmpty) {
                 return;
-            }
-            const question = interviewData[currentQuestion].question;
-            const answer = codeValue[currentQuestion].answer;
-            const examContentData: ExamContentModal | any = {
-                examId,
-                question,
-                answer,
-            }
-            try {
-                await examService.addExamContent(examContentData);
-            } catch (e) {
-                console.log(e);
             }
             setCurrentQuestion(currentQuestion + 1);
             setAnswerEmpty(true);
@@ -109,10 +66,6 @@ function Home(): JSX.Element {
         setAnswerEmpty(value.trim() === '');
     }
 
-    window.onbeforeunload = function () {
-        return "Data will be lost if you leave the page, are you sure?";
-    };
-
     return (
         <div className="Home">
             {
@@ -125,12 +78,14 @@ function Home(): JSX.Element {
                             {
                                 results[0].questions.map((q: any, i: number) => {
                                     return (
-                                        <div className="questionsFeedback">
-                                            <span>{q.id + 1}</span>
-                                            <span>{q.question}</span>
-                                            <span>{q.answer}</span>
-                                            <span>{q.correct ? '+' : '-'}</span>
-                                        </div>
+                                        <>
+                                            <div className="questionsFeedback">
+                                                <span>{q.id}</span>
+                                                <span>{q.question}</span>
+                                                <span>{q.answer}</span>
+                                                <span>{q.correct ? <DoneIcon fontSize="small" /> : <ErrorOutlineIcon fontSize="small" />}</span>
+                                            </div>
+                                        </>
                                     )
                                 })
                             }
@@ -138,18 +93,10 @@ function Home(): JSX.Element {
 
                     </div>
                     :
-                    startInterviewState === false ?
-                        <div className="StartInterviewDiv">
-                            <h2>Exam parameters: </h2> 
-                            <span>language: {authSlice.language}</span>
-                            <span>Difficulty: {authSlice.difficulty}</span>
-                            <button className="StartInterviewButton" onClick={startInterview}>Start</button>
-                        </div>
-                        :
                         isLoading ? (
                             <TypeAnimation
                                 sequence={[
-                                    'Building your Inteview',
+                                    'Building your Interview',
                                     1000,
                                     'Building your Assessment',
                                     1000,
@@ -209,4 +156,4 @@ function Home(): JSX.Element {
 }
 
 
-export default Home;
+export default Interview;

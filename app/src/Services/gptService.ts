@@ -3,13 +3,11 @@ import { InterviewData } from "../models/InterviewData";
 import { BASE_URL } from "./config";
 
 class GptService {
-    async sendInterviewData(language: string, difficulty: string, type: string) {
+    async sendInterviewData(language: string, difficulty: string) {
         const data: InterviewData = {
             language,
             difficulty,
-            type
         }
-        console.log(data);
         
         const results = await (await axios.post(`${BASE_URL}/interview`, data)).data;
         return results;

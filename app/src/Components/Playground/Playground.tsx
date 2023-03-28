@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
 
 function Playground(props: { onCodeChange: (value: string) => void,clearEditorValue:any }): JSX.Element {
-    const authSlice = useSelector((state: any) => state.auth);
+    const interviewSlice = useSelector((state: any) => state.interview);
 
     function handleEditorChange(value: any) {        
         if (value !== "") {
@@ -16,8 +16,8 @@ function Playground(props: { onCodeChange: (value: string) => void,clearEditorVa
         <div className="Playground">
             <Editor
                 height="90%"
-                defaultLanguage={authSlice.language}
-                defaultValue="//Code..."
+                defaultLanguage={interviewSlice.language}
+                defaultValue={'//Write the code here'}
                 value={props.clearEditorValue}
                 theme="vs-dark"
                 onChange={handleEditorChange} 

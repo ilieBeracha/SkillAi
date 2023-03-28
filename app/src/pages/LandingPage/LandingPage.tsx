@@ -1,19 +1,20 @@
 import "./LandingPage.css";
 import { Routes, Route } from 'react-router-dom';
-import RegisterPage from "../RegisterPage/RegisterPage";
-import LoginPage from "../LoginPage/LoginPage";
-import Guest from "../Guest/Guest";
 import LandingPageHome from "../LandingPageHome/LandingPageHome";
-
+import Interview from "../Interview/Interview";
+import { useSelector } from "react-redux"
 
 function LandingPage(): JSX.Element {
+    const interviewSlice = useSelector((state: any) => state.interview)
+
     return (
         <div className="LandingPage">
             <Routes>
-                <Route path="/" element={<LandingPageHome />}></Route>
-                <Route path="/login" element={<LoginPage />}></Route>
-                <Route path="/register" element={<RegisterPage />}></Route>
-                {/* <Route path="/guest" element={<Guest />}></Route> */}
+                {interviewSlice===null ?
+                    <Route path="*" element={<LandingPageHome />}></Route>
+                    :
+                    <Route path="*" element={<Interview />}></Route>
+                }
             </Routes>
         </div>
     );
