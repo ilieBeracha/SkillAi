@@ -1,7 +1,6 @@
 import "./Playground.css";
 import { useSelector } from 'react-redux'
-import { useState } from 'react';
-import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
+import Editor from "@monaco-editor/react";
 
 function Playground(props: { onCodeChange: (value: string) => void,clearEditorValue:any }): JSX.Element {
     const interviewSlice = useSelector((state: any) => state.interview);
