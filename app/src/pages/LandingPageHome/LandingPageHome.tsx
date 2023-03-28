@@ -4,12 +4,13 @@ import image from '../../assets/images/interview4.png';
 import view from '../../assets/images/view.png';
 import clouds from '../../assets/images/clouds.png';
 import ConfInterview from "../../Components/ConfInterview/ConfInterview";
-
+import logo from '../../assets/images/logo.png';
 function LandingPageHome(): JSX.Element {
 
 
     return (
         <div className="LandingPageHome">
+            
             <div className="LandingPageHomePreview">
                 <div className="LandingPageHomeSentance">
                     <h1>Improve Your coding skills with ease by using our AI-powered code interview tool</h1>
@@ -27,7 +28,7 @@ function LandingPageHome(): JSX.Element {
                 </div>
             </div>
             <div className="LandingPageHomeImage">
-                <img id="cloudImg" src={clouds} alt="" />
+                <img id="cloudImg" src={image} alt="" />
                 <img id="mountainImg" src={view} alt="" />
             </div>
         </div>

@@ -10,7 +10,7 @@ function LandingPage(): JSX.Element {
     return (
         <div className="LandingPage">
             <Routes>
-                {interviewSlice===null ?
+                {interviewSlice === null ?
                     <Route path="*" element={<LandingPageHome />}></Route>
                     :
                     <Route path="*" element={<Interview />}></Route>

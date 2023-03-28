@@ -1,8 +1,5 @@
 import "./Header.css";
 import logo from '../../assets/images/logo.png';
-import { useDispatch, useSelector } from "react-redux";
-import { removeInterviewSettings } from "../../app/interviewSlice";
-import { useEffect } from "react";
 
 function Header(): JSX.Element {
     function goToLandingPage() {
